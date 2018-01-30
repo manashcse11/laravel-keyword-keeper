@@ -10,11 +10,11 @@
                 </div>
 
                 <div class="panel-body">
-                    <h4>First class function</h4>
-                    <p>Lorem ipsum test for something new jsdafhkj kjsdhf</p>
-                    <hr>
-                    <h4>First class function</h4>
-                    <p>Lorem ipsum test for something new jsdafhkj kjsdhf</p>
+                    @foreach($keywords as $keyword)
+                        <h4>{{ $keyword->title }}</h4>
+                        <p>{{ $keyword->description }}</p>
+                        <hr>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -25,15 +25,25 @@
                 </div>
 
                 <div class="panel-body">
-                    <div class="form-group">
-                        <input class="form-control" name="title" type="text" placeholder="Keyword">
-                    </div>
-                    <div class="form-group">
-                        <textarea class="form-control" name="description" id="" cols="30" rows="10" placeholder="Description"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <button class="btn btn-primary" type="submit">Create</button>
-                    </div>
+                    <form method="POST" action="/keyword">
+                        {{ csrf_field() }}
+                        <div class="form-group">
+                            <input class="form-control" name="title" type="text" placeholder="Keyword" value="{{ old('title') }}">
+                        </div>
+                        @if($errors->has('title'))
+                            <div class="alert alert-danger">
+                                {{$errors->first('title')}}
+                            </div>
+                        @endif
+                        <div class="form-group">
+                            <textarea class="form-control" name="description" id="" cols="30" rows="10" placeholder="Description">
+                                {{ old('description') }}
+                            </textarea>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary" type="submit">Create</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
