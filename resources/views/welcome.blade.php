@@ -12,7 +12,9 @@
                 <div class="panel-body">
                     @foreach($keywords as $keyword)
                         <h4>{{ $keyword->title }}</h4>
-                        <p>{{ $keyword->description }}</p>
+                        <p>
+                            {{ $keyword->description }}
+                        </p>
                         <hr>
                     @endforeach
                 </div>
